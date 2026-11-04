@@ -1,0 +1,3 @@
+# G2 overlay. Install requirements-langgraph-g1.lock and the project dependencies first.
+langgraph-checkpoint-postgres==3.2.0
+psycopg-pool==3.3.3

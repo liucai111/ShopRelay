@@ -1,0 +1,11 @@
+{
+  "snapshot_id":"sim-orders-2026-10-18-v1",
+  "users":[{"user_id":"u_demo","display_name":"演示甲"},{"user_id":"u_other","display_name":"演示乙"}],
+  "products":[{"product_id":"P-CUP","name":"定制马克杯","category":"custom","price_cents":8900,"available_qty":20},{"product_id":"P-KETTLE","name":"电热水壶","category":"appliance","price_cents":15900,"available_qty":12},{"product_id":"P-SNACK","name":"坚果礼盒","category":"food","price_cents":6800,"available_qty":30}],
+  "orders":[
+    {"order_id":"ORD-PAID","user_id":"u_demo","status":"PAID","paid_at":"2026-10-10T08:00:00Z","delivered_at":null,"paid_cents":15900,"product_id":"P-KETTLE","quantity":1,"version":1},
+    {"order_id":"ORD-DELIVERED","user_id":"u_demo","status":"DELIVERED","paid_at":"2026-06-30T23:59:59Z","delivered_at":"2026-10-16T10:00:00Z","paid_cents":8900,"product_id":"P-CUP","quantity":1,"version":1},
+    {"order_id":"ORD-SHIPPED","user_id":"u_demo","status":"SHIPPED","paid_at":"2026-10-09T08:00:00Z","delivered_at":null,"paid_cents":6800,"product_id":"P-SNACK","quantity":1,"version":1},
+    {"order_id":"ORD-OTHER","user_id":"u_other","status":"PAID","paid_at":"2026-10-10T08:00:00Z","delivered_at":null,"paid_cents":15900,"product_id":"P-KETTLE","quantity":1,"version":1}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shoprelay.local/eval/eval-experiment-v1.schema.json",
+  "title": "ShopRelay EvalExperiment v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "experiment_id", "config_snapshot", "config_sha256", "git_commit", "knowledge_index_version", "model_versions", "prompt_versions", "strategy", "tool_permissions", "budget", "data_version", "scoring_version"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "experiment_id": {"type": "string"}, "config_snapshot": {"type": "object"},
+    "config_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}, "git_commit": {"type": "string"},
+    "knowledge_index_version": {"type": ["string", "null"]}, "model_versions": {"type": "object", "additionalProperties": {"type": "string"}},
+    "prompt_versions": {"type": "object", "additionalProperties": {"type": "string"}}, "strategy": {"type": "string"},
+    "tool_permissions": {"type": "array", "items": {"type": "string"}}, "budget": {"type": "object"},
+    "data_version": {"type": "string"}, "scoring_version": {"type": "string"}
+  }
+}

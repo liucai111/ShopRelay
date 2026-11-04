@@ -1,0 +1,15 @@
+{
+  "schema_version": "shoprelay.m4.4-scenario-set.v1",
+  "status": "ENGINEERING_SCENARIOS_NOT_GOLD",
+  "created_at": "2026-10-23",
+  "scenarios": [
+    {"scenario_id":"M44-01","family":"order_logistics","mode":"read_only","acceptance":"Authenticated owner reads an existing order and only stored shipment history; no live-carrier claim."},
+    {"scenario_id":"M44-02","family":"product_search_recommendation","mode":"read_only","acceptance":"Product results derive from catalog; inventory without trusted observation time remains unconfirmed."},
+    {"scenario_id":"M44-03","family":"policy_after_sales","mode":"read_only","acceptance":"Policy result is tied to retrieved current evidence, version, effective interval, and citations; use BM25 or configured hybrid strategy."},
+    {"scenario_id":"M44-04","family":"return_refund_action","mode":"confirmed_isolated_write","acceptance":"Before explicit owner confirmation there is no business write; after confirmation only an isolated pending-review application may be submitted."},
+    {"scenario_id":"M44-05","family":"order_cancellation","mode":"confirmed_isolated_write","acceptance":"Cancellation outcomes follow verified order/fulfillment/reservation state; no shipment, payment, or refund side effect is fabricated."},
+    {"scenario_id":"M44-06","family":"human_escalation","mode":"confirmed_isolated_write","acceptance":"Human escalation draft requires explicit confirmation for isolated ticket submission; no external assignment or notification claim."},
+    {"scenario_id":"M44-07","family":"multi_agent_security","mode":"deny_or_scope","acceptance":"Cross-owner access, spoofed identity, prompt injection, and unconfirmed write requests fail closed before tool execution."},
+    {"scenario_id":"M44-08","family":"fault_recovery","mode":"fault_injection","acceptance":"Provider/retrieval/MCP/database/SSE/restart/idempotency failures retain explicit terminal semantics and do not replay completed effects."}
+  ]
+}

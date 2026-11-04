@@ -1,0 +1,18 @@
+{
+  "dataset_version":"policy-initial-v1-unfrozen",
+  "note":"人工编写的首批开发/验证样本；未完成隔日盲审，不是冻结集或最终评测。",
+  "cases":[
+    {"case_id":"p01","group_id":"return_window","dataset_split":"dev","user_query":"普通商品签收七天内可以无理由退货吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/return-standard@2026-07#no-reason"]},
+    {"case_id":"p02","group_id":"custom_exception","dataset_split":"dev","user_query":"定制商品可以无理由退货吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/return-standard@2026-07#no-reason"]},
+    {"case_id":"p03","group_id":"quality_exception","dataset_split":"validation","user_query":"定制商品质量问题签收30天内能提交退货审核吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/return-standard@2026-07#quality"]},
+    {"case_id":"p04","group_id":"refund_pre_shipment","dataset_split":"dev","user_query":"已付款未发货可以申请整单退款吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/refund@2026-01#before-shipping"]},
+    {"case_id":"p05","group_id":"refund_uniqueness","dataset_split":"validation","user_query":"同一订单换个退款原因能再提交一个开放的整单退款申请吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/refund@2026-01#uniqueness"]},
+    {"case_id":"p06","group_id":"cancel_shipped","dataset_split":"dev","user_query":"订单已经发货还能取消吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/cancel@2026-01#eligible"]},
+    {"case_id":"p07","group_id":"delivery_truth","dataset_split":"validation","user_query":"政策文档能证明我的订单已签收吗","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/delivery@2026-01#tracking"]},
+    {"case_id":"p08","group_id":"coupon_version","dataset_split":"dev","user_query":"优惠券应按付款时还是咨询时的政策版本核对","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/coupon@2026-01#validity"]},
+    {"case_id":"p09","group_id":"warranty","dataset_split":"validation","user_query":"电热水壶保修期限和人为损坏例外是什么","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/warranty@2026-01#general"]},
+    {"case_id":"p10","group_id":"return_window_old","dataset_split":"dev","user_query":"普通商品签收七天内无理由退货的旧版规则","evaluation_at":"2026-06-30T23:59:59Z","acceptable_evidence_ids":["policies/return-standard@2026-01#no-reason"]},
+    {"case_id":"p11","group_id":"quality_exception_old","dataset_split":"validation","user_query":"旧版定制商品质量问题30天内能申请审核吗","evaluation_at":"2026-06-30T23:59:59Z","acceptable_evidence_ids":["policies/return-standard@2026-01#quality"]},
+    {"case_id":"p12","group_id":"refund_after_delivery","dataset_split":"dev","user_query":"已签收订单退款前必须有什么售后申请","evaluation_at":"2026-10-18T00:00:00Z","acceptable_evidence_ids":["policies/refund@2026-01#before-shipping"]}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"M6.1-B JudgeRequest v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["request_id","trial_id","rubric","blinded_input","allowed_evidence"],
+  "properties":{
+    "request_id":{"type":"string","minLength":1},
+    "trial_id":{"type":"string","minLength":1},
+    "rubric":{"type":"object","additionalProperties":false,"required":["rubric_id","version","dimensions"],"properties":{"rubric_id":{"type":"string"},"version":{"type":"string"},"dimensions":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}}}},
+    "blinded_input":{"type":"object"},
+    "allowed_evidence":{"type":"array","items":{"type":"string"}}
+  }
+}

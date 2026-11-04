@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"M6.1-B BudgetLimits v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["provider_calls","embedding_calls","judge_calls","total_tokens","estimated_usd","tool_calls","max_calls_per_trial","max_concurrent_trials","max_duration_seconds","max_retries"],
+  "properties":{
+    "provider_calls":{"type":"integer","minimum":0},
+    "embedding_calls":{"type":"integer","minimum":0},
+    "judge_calls":{"type":"integer","minimum":0},
+    "total_tokens":{"type":"integer","minimum":0},
+    "estimated_usd":{"type":"number","minimum":0},
+    "tool_calls":{"type":"integer","minimum":0},
+    "max_calls_per_trial":{"type":"integer","minimum":0},
+    "max_concurrent_trials":{"type":"integer","minimum":1},
+    "max_duration_seconds":{"type":"integer","minimum":1},
+    "max_retries":{"type":"integer","minimum":0}
+  }
+}

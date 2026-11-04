@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"M6.1-B deterministic score record v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["score_id","trial_id","grader_id","grader_version","dimension","verdict","reason_code","evidence_refs","score_source","rubric_version"],
+  "properties":{
+    "score_id":{"type":"string","minLength":1},
+    "trial_id":{"type":"string","minLength":1},
+    "grader_id":{"type":"string","minLength":1},
+    "grader_version":{"type":"string","minLength":1},
+    "dimension":{"type":"string","enum":["route","tool_allowlist","schema_valid","ownership","unconfirmed_writes","evidence_ids","business_outcome","safety"]},
+    "verdict":{"type":"string","enum":["PASS","FAIL","UNKNOWN","NOT_APPLICABLE"]},
+    "reason_code":{"type":"string","minLength":1},
+    "evidence_refs":{"type":"array","items":{"type":"string"}},
+    "score_source":{"const":"DETERMINISTIC_CODE"},
+    "rubric_version":{"type":"string","minLength":1}
+  }
+}

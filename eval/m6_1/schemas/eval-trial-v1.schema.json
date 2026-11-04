@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shoprelay.local/eval/eval-trial-v1.schema.json",
+  "title": "ShopRelay EvalTrial v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "trial_id", "case_id", "experiment_id", "trial_index", "run_ids", "lifecycle_status", "model_calls", "tool_calls", "raw_result_ref", "error", "usage", "latency_ms"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "trial_id": {"type": "string"}, "case_id": {"type": "string"},
+    "experiment_id": {"type": "string"}, "trial_index": {"type": "integer", "minimum": 1},
+    "run_ids": {"type": "array", "items": {"type": "string"}},
+    "lifecycle_status": {"enum": ["SUCCEEDED", "FAILED", "MODEL_UNAVAILABLE", "UNKNOWN_RESULT", "UNSCORABLE", "NOT_RUN", "BUDGET_STOP", "ENV_ERROR", "PENDING_HUMAN_REVIEW"]},
+    "model_calls": {"type": "array", "items": {"type": "object"}}, "tool_calls": {"type": "array", "items": {"type": "object"}},
+    "raw_result_ref": {"type": ["string", "null"]}, "error": {"type": ["object", "null"]},
+    "usage": {"type": "object"}, "latency_ms": {"type": "object", "additionalProperties": {"type": ["number", "null"], "minimum": 0}}
+  }
+}

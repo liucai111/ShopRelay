@@ -1,0 +1,5 @@
+# Formal readonly evaluation overlay; install with the project [formal] extra.
+-r requirements-langgraph-g1.lock
+-r requirements-langgraph-g2.lock
+cryptography==50.0.2
+numpy==2.5.4

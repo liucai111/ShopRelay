@@ -1,0 +1,91 @@
+name: shoprelay-m62-eval
+x-hardened: &hardened
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs: ['/tmp:size=128m,mode=1777']
+  restart: unless-stopped
+services:
+  initializer:
+    image: shoprelay-m62-eval-control:r26
+    user: '0:0'
+    profiles: [operations]
+    network_mode: none
+    entrypoint: [/opt/evalvenv/bin/python,-m,eval.m6_2.container_operations_r26,bootstrap]
+    volumes: [assets:/assets,control-results:/results,app-state:/app-state,public-trust:/trust,issuer-key:/issuer-key,db-secret:/db-secret]
+  postgres:
+    image: postgres:16.12-alpine3.23
+    hostname: m62-eval-postgres
+    environment:
+      POSTGRES_DB: shoprelay_m11_test
+      POSTGRES_USER: evalapp
+      POSTGRES_PASSWORD_FILE: /run/db-secret/password
+    networks:
+      database:
+        aliases: [m62-eval-postgres]
+    volumes: [postgres-data:/var/lib/postgresql/data,db-secret:/run/db-secret:ro]
+    healthcheck:
+      test: [CMD-SHELL,'pg_isready -U evalapp -d shoprelay_m11_test']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+  application:
+    <<: *hardened
+    image: shoprelay-m62-eval-app:r26
+    user: '10002:10002'
+    command: [-m,eval.m6_1.container_startup]
+    depends_on:
+      postgres: {condition: service_healthy}
+    networks: [control,database]
+    environment:
+      HTTP_PROXY: http://proxy:7892
+      HTTPS_PROXY: http://proxy:7892
+      ALL_PROXY: http://proxy:7892
+      http_proxy: http://proxy:7892
+      https_proxy: http://proxy:7892
+      all_proxy: http://proxy:7892
+      NO_PROXY: ''
+      no_proxy: ''
+      OTEL_SDK_DISABLED: 'true'
+      LANGCHAIN_TRACING_V2: 'false'
+      LANGSMITH_TRACING: 'false'
+    volumes: [app-state:/opt/shoprelay/data/eval,public-trust:/opt/shoprelay/data/eval/formal-trust:ro,db-secret:/run/db-secret:ro]
+  control:
+    <<: *hardened
+    image: shoprelay-m62-eval-control:r26
+    user: '10001:10001'
+    networks: [control]
+    volumes: [assets:/opt/shoprelay/data/eval/new-assets-r26,control-results:/opt/shoprelay/data/eval/formal-ledgers,public-trust:/opt/shoprelay/data/eval/formal-trust:ro]
+    environment:
+      OTEL_SDK_DISABLED: 'true'
+      LANGCHAIN_TRACING_V2: 'false'
+      LANGSMITH_TRACING: 'false'
+  issuer:
+    <<: *hardened
+    image: shoprelay-m62-eval-control:r26
+    user: '10003:10003'
+    group_add: ['10001']
+    profiles: [operations]
+    network_mode: none
+    entrypoint: [/opt/evalvenv/bin/python,-m,eval.m6_2.container_operations_r26,sign]
+    volumes: [issuer-key:/run/issuer-key:ro,public-trust:/opt/shoprelay/data/eval/formal-trust,control-results:/opt/shoprelay/data/eval/formal-ledgers]
+  proxy:
+    <<: *hardened
+    image: shoprelay-m62-eval-app:r26
+    user: '10002:10002'
+    command: [-m,eval.m6_1.container_proxy]
+    networks: [control,egress]
+    volumes: [public-trust:/opt/shoprelay/data/eval/formal-trust:ro]
+networks:
+  control: {internal: true}
+  database: {internal: true}
+  egress: {}
+volumes:
+  assets: {labels: {com.shoprelay.purpose: r26-new-candidates-only}}
+  control-results: {labels: {com.shoprelay.purpose: r26-control-ledger}}
+  app-state: {labels: {com.shoprelay.purpose: r26-app-receipts}}
+  public-trust: {labels: {com.shoprelay.purpose: r26-engineering-public-only}}
+  issuer-key: {labels: {com.shoprelay.purpose: r26-engineering-not-production}}
+  db-secret: {labels: {com.shoprelay.purpose: r26-isolated-db-only}}
+  postgres-data: {labels: {com.shoprelay.purpose: r26-isolated-business-db}}

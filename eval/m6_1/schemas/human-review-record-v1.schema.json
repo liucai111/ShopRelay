@@ -1,0 +1,8 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"M6.1-B Human Review record v1",
+  "oneOf":[
+    {"type":"object","additionalProperties":false,"required":["review_id","trial_id","status","reason","evidence_refs","created_at_utc"],"properties":{"review_id":{"type":"string"},"trial_id":{"type":"string"},"status":{"const":"PENDING_HUMAN_REVIEW"},"reason":{"type":"string"},"evidence_refs":{"type":"array","items":{"type":"string"}},"created_at_utc":{"type":"string","format":"date-time"}}},
+    {"type":"object","additionalProperties":false,"required":["decision_id","review_id","reviewer_identity","reviewer_type","decision","rationale","created_at_utc"],"properties":{"decision_id":{"type":"string"},"review_id":{"type":"string"},"reviewer_identity":{"type":"string"},"reviewer_type":{"enum":["HUMAN","SYNTHETIC_NOT_HUMAN"]},"decision":{"type":"string","enum":["PASS","FAIL","UNKNOWN","UNSCORABLE"]},"rationale":{"type":"string"},"created_at_utc":{"type":"string","format":"date-time"}}}
+  ]
+}

@@ -1,0 +1,47 @@
+name: Core offline acceptance
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OTEL_SDK_DISABLED: 'true'
+      LANGSMITH_TRACING: 'false'
+      HF_HUB_OFFLINE: '1'
+      PYTHONPATH: '.:tests'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install locked core dependencies
+        run: pip install -e '.[dev,llm]' -r requirements-langgraph-g1.lock -r requirements-langgraph-g2.lock
+      - name: Static syntax check
+        run: python -m compileall -q app scripts/m65_local_delivery.py scripts/verify_m65_delivery.py
+      - name: Prepare ephemeral index
+        run: |
+          mkdir -p docs/probes
+          python -m app.m0.cli ingest
+      - name: Unit and policy execution
+        run: python docs/probes/run_m62_r22_offline.py tests/test_customer_paraphrases.py tests/test_customer_order_list.py tests/test_m2_routing.py -p pytest_workspace_tmp_path_r1 -p no:cacheprovider --junitxml=docs/probes/ci-unit.xml -q
+      - name: Persistent demo budget and separate acceptance account
+        run: python docs/probes/run_m62_r22_offline.py tests/test_customer_experience.py -k 'metered_sdk or manual_continuation or acceptance_receipt_budget or sse_uses_only_receipt' -p pytest_workspace_tmp_path_r1 -p no:cacheprovider --junitxml=docs/probes/ci-budget.xml -q
+      - name: Core BM25 API integration (optional local-vector test excluded)
+        run: python docs/probes/run_m62_r22_offline.py --allow-loopback tests/test_m1_api.py -k 'not single_chat_can_use_real_rrf_retrieval_service' -p pytest_workspace_tmp_path_r1 -p no:cacheprovider --junitxml=docs/probes/ci-api.xml -q
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: core-junit, path: 'docs/probes/ci-*.xml'}
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run: {working-directory: frontend}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm, cache-dependency-path: frontend/package-lock.json}
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

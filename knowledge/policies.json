@@ -1,0 +1,12 @@
+{
+  "knowledge_version": "sim-policy-2026-01",
+  "documents": [
+    {"policy_id":"return-standard","version":"2026-01","effective_from":"2026-01-01T00:00:00Z","effective_to":"2026-07-01T00:00:00Z","title":"退货政策旧版","clauses":[{"clause_id":"no-reason","text":"签收后7×24小时内，普通商品保持不影响二次销售状态，可提交整单无理由退货申请。定制商品和食品不受理无理由退货。申请不等于批准。"},{"clause_id":"quality","text":"签收后30天内发现质量问题，可提交整单退货申请进入人工审核；定制商品与食品也可申请质量问题审核，不承诺批准。"}]},
+    {"policy_id":"return-standard","version":"2026-07","effective_from":"2026-07-01T00:00:00Z","effective_to":null,"title":"退货政策现行版","clauses":[{"clause_id":"no-reason","text":"签收后7×24小时内，普通商品未影响二次销售可提交整单无理由退货申请；定制商品和食品不适用。提交后由人工审核，不保证批准。"},{"clause_id":"quality","text":"签收后30天内的质量问题可提交整单退货申请，由人工审核；定制商品与食品仍可申请。超过30天需转人工核对保修。"}]},
+    {"policy_id":"refund","version":"2026-01","effective_from":"2026-01-01T00:00:00Z","effective_to":null,"title":"退款申请政策","clauses":[{"clause_id":"before-shipping","text":"已付款且未发货的订单可申请整单退款。已签收订单需要已批准的退货申请才能申请退款；已发货未签收默认转人工。申请不代表真实到账。"},{"clause_id":"uniqueness","text":"同一订单任一时刻仅允许一个开放的整单退款申请，原因不同也不例外。部分退款暂不支持。"}]},
+    {"policy_id":"cancel","version":"2026-01","effective_from":"2026-01-01T00:00:00Z","effective_to":null,"title":"取消订单政策","clauses":[{"clause_id":"eligible","text":"未发货订单可请求取消，已发货订单不能取消。已付款订单取消时须同步创建整单退款申请；已有开放退款申请时不得取消。取消前需要用户确认。"}]},
+    {"policy_id":"delivery","version":"2026-01","effective_from":"2026-01-01T00:00:00Z","effective_to":null,"title":"物流政策","clauses":[{"clause_id":"tracking","text":"物流进度以查询时的运单事件为准。政策文档不能证明任何订单已经发货、签收或何时送达。"}]},
+    {"policy_id":"coupon","version":"2026-01","effective_from":"2026-01-01T00:00:00Z","effective_to":null,"title":"优惠券政策","clauses":[{"clause_id":"validity","text":"优惠券适用范围、门槛、有效期与能否叠加以付款时有效版本及订单使用记录核对。未付款订单咨询仅说明查询时规则。"}]},
+    {"policy_id":"warranty","version":"2026-01","effective_from":"2026-01-01T00:00:00Z","effective_to":null,"title":"保修政策","clauses":[{"clause_id":"general","text":"普通电器自付款起一年内可提交保修咨询，耗材与人为损坏不在模拟保修范围。具体商品缺少条款时转人工核对。"}]}
+  ]
+}

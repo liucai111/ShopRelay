@@ -1,0 +1,45 @@
+{
+  "purpose": "Public synthetic policy regression; no original owner/session/order IDs or transcript",
+  "answer": "退货一般分两种情况：普通商品在签收后7×24小时内，如果未影响二次销售，可以提交整单无理由退货申请；如果存在质量问题，则在签收后30天内可以提交整单退货申请。这两种申请提交后都需要人工审核，但不保证一定批准。具体的提交入口和操作步骤我这边无法核实，建议您联系商家客服确认。另外，如果历史订单[ORDER_REF]就是您要咨询的订单，以上退货申请都还需要结合您的签收时间来判断是否适用；方便的话，请告诉我该订单的签收时间。",
+  "citations": [
+    "policies/return-standard@2026-07#no-reason",
+    "policies/return-standard@2026-07#quality"
+  ],
+  "evidence": [
+    {
+      "chunk_id": "policies/refund@2026-01#uniqueness",
+      "policy_id": "refund",
+      "version": "2026-01",
+      "title": "退款申请政策",
+      "clause_id": "uniqueness",
+      "effective_from": "2026-01-01T00:00:00Z",
+      "effective_to": null,
+      "content": "同一订单任一时刻仅允许一个开放的整单退款申请,原因不同也不例外。部分退款暂不支持。"
+    },
+    {
+      "chunk_id": "policies/return-standard@2026-07#no-reason",
+      "policy_id": "return-standard",
+      "version": "2026-07",
+      "title": "退货政策现行版",
+      "clause_id": "no-reason",
+      "effective_from": "2026-07-01T00:00:00Z",
+      "effective_to": null,
+      "content": "签收后7×24小时内,普通商品未影响二次销售可提交整单无理由退货申请;定制商品和食品不适用。提交后由人工审核,不保证批准。"
+    },
+    {
+      "chunk_id": "policies/return-standard@2026-07#quality",
+      "policy_id": "return-standard",
+      "version": "2026-07",
+      "title": "退货政策现行版",
+      "clause_id": "quality",
+      "effective_from": "2026-07-01T00:00:00Z",
+      "effective_to": null,
+      "content": "签收后30天内的质量问题可提交整单退货申请,由人工审核;定制商品与食品仍可申请。超过30天需转人工核对保修。"
+    }
+  ],
+  "followup_answer": "如果是质量问题，可以走质量退货：签收后30天内可提交整单退货申请，由人工审核；定制商品与食品也仍可申请。超过30天则需转人工核对保修。\n\n提交前建议先确认：您是否在签收后30天内，并准备好能说明质量问题的凭证。\n\n另外，若涉及同一订单退款，同一时间只能有一个开放的整单退款申请，部分退款暂不支持。",
+  "followup_citations": [
+    "policies/return-standard@2026-07#quality",
+    "policies/refund@2026-01#uniqueness"
+  ]
+}

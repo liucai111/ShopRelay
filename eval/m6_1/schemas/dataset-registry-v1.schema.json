@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shoprelay.local/eval/dataset-registry-v1.schema.json",
+  "title": "ShopRelay Dataset Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "registry_sha256", "assets"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "registry_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["asset_id", "asset_type", "version", "parent_asset_id", "split", "case_count", "source_path", "sha256", "review_status", "reviewer_id", "reviewed_at_utc", "review_method", "independence_status", "exposure_status", "scoreability", "locked_at_utc", "access_policy", "limitations", "integrity_status", "historical_source_ref"],
+        "properties": {
+          "asset_id": {"type": "string", "minLength": 1}, "asset_type": {"type": "string", "minLength": 1},
+          "version": {"type": "string", "minLength": 1}, "parent_asset_id": {"type": ["string", "null"]},
+          "split": {"enum": ["dev", "validation", "SEEN_VALIDATION", "test_candidate", "frozen_test", "synthetic", "UNKNOWN", "MIXED"]},
+          "case_count": {"type": ["integer", "null"], "minimum": 0}, "source_path": {"type": "string"},
+          "sha256": {"type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$"},
+          "review_status": {"enum": ["BATCH_USER_CONFIRMED", "INDEPENDENT_REVIEWED", "CANDIDATE", "UNKNOWN", "NOT_REVIEWED"]},
+          "reviewer_id": {"type": ["string", "null"]}, "reviewed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+          "review_method": {"type": ["string", "null"]},
+          "independence_status": {"enum": ["INDEPENDENT", "SEEN_VALIDATION", "HISTORICALLY_EXPOSED", "NOT_VERIFIED", "UNKNOWN"]},
+          "exposure_status": {"enum": ["UNEXPOSED_VERIFIED", "SEEN_VALIDATION", "HISTORIC_EXPOSURE_DISCLOSED", "NOT_VERIFIED", "UNKNOWN"]},
+          "scoreability": {"enum": ["ELIGIBLE", "HISTORICAL_ONLY", "NOT_SCOREABLE", "NOT_VERIFIED"]},
+          "locked_at_utc": {"type": ["string", "null"], "format": "date-time"}, "access_policy": {"type": "string"},
+          "limitations": {"type": "array", "items": {"type": "string"}},
+          "integrity_status": {"enum": ["VERIFIED", "NOT_VERIFIED", "INVALID_MANIFEST", "UNKNOWN"]},
+          "historical_source_ref": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

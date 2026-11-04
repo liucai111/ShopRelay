@@ -1,0 +1,8 @@
+{
+  "schema_version": "shoprelay.m3.6-scenario-lock.v1",
+  "dataset_path": "eval/m3.6/m3.6-cooperation-scenarios-r1.json",
+  "sha256": "2667eb590db48024e2e7f1432ca1dfd9e37d0800ed0cfa7a64b7fe83719d9da6",
+  "locked_at": "2026-10-22",
+  "locked_before_execution": true,
+  "approval_status": "CANDIDATE_ENGINEERING_EXPECTATIONS"
+}

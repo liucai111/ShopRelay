@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shoprelay.local/eval/eval-outcome-v1.schema.json",
+  "title": "ShopRelay EvalOutcome v1",
+  "description": "Execution verdicts and grading state are independent fields; run success is not task success.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "outcome_id", "trial_id", "run_success", "answer_correctness", "task_success", "safety_result", "grading_status", "rubric_version", "score_refs", "created_at_utc"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "outcome_id": {"type": "string"}, "trial_id": {"type": "string"},
+    "run_success": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE"]},
+    "answer_correctness": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE"]},
+    "task_success": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE"]},
+    "safety_result": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE"]},
+    "grading_status": {"enum": ["NOT_GRADED", "PENDING_HUMAN_REVIEW", "GRADED", "UNSCORABLE", "GRADING_ERROR"]},
+    "rubric_version": {"type": "string"}, "score_refs": {"type": "array", "items": {"type": "string"}},
+    "created_at_utc": {"type": "string", "format": "date-time"}
+  }
+}

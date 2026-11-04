@@ -1,0 +1,8 @@
+{
+  "schema_version": "shoprelay.m4.4-scenario-lock.v1",
+  "dataset_path": "eval/m4.4/m4.4-scenarios-r1.json",
+  "sha256": "c0bb4a59bfbd844328a092f714b606803bc48a868e2830b70ddba8c3b1c1b2bb",
+  "locked_at": "2026-10-23",
+  "locked_before_execution": true,
+  "semantics": "Engineering acceptance scenarios only; not a quality gold set or production SLO sample."
+}

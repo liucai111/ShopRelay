@@ -1,0 +1,33 @@
+name: shoprelay-m0
+
+services:
+  postgres:
+    image: postgres:16.12-alpine3.23
+    environment:
+      POSTGRES_DB: shoprelay
+      POSTGRES_USER: shoprelay
+      POSTGRES_PASSWORD: ${SHOPRELAY_POSTGRES_PASSWORD:?Set SHOPRELAY_POSTGRES_PASSWORD in the local process environment}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shoprelay -d shoprelay"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.3
+    ports:
+      - "127.0.0.1:6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  postgres_data:
+    labels:
+      com.shoprelay.owner: shoprelay-m0
+  qdrant_data:
+    labels:
+      com.shoprelay.owner: shoprelay-m0

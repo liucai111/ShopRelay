@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shoprelay.local/eval/eval-case-v1.schema.json",
+  "title": "ShopRelay EvalCase v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "group_id", "split", "input", "expected_outcome", "rubric_refs", "fixture_ref", "risk_level", "data_version"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "case_id": {"type": "string", "minLength": 1},
+    "group_id": {"type": "string", "minLength": 1},
+    "split": {"enum": ["dev", "validation", "SEEN_VALIDATION", "test_candidate", "frozen_test", "synthetic", "UNKNOWN", "MIXED"]},
+    "input": {"type": "object"}, "expected_outcome": {"type": "object"},
+    "rubric_refs": {"type": "array", "items": {"type": "string"}},
+    "fixture_ref": {"type": ["string", "null"]}, "risk_level": {"type": "string"}, "data_version": {"type": "string"}
+  }
+}
