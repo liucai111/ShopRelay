@@ -177,3 +177,6 @@ deploy/m62-eval/personal-*.yaml
 !/eval/dataset/policy-initial.json
 !/eval/dataset/annotation-guide.md
 !/eval/dataset/route-annotation-guide.md
+
+# Curated screenshots for the public README.
+!/docs/screenshots/
